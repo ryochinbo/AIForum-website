@@ -4,10 +4,21 @@ document.addEventListener('DOMContentLoaded', () => {
     const closeButton = document.querySelector('.close-button');
 
     /**
-     * マークダウンテキストを解析し、フロントマターとコンテンツに分割します。
-     * @param {string} text - 解析するマークダウンテキスト。
-     * @returns {{metadata: object, content: string}} 解析されたメタデータとコンテンツ。
+     * デバッグメッセージをコンテナに表示します。
+     * @param {HTMLElement} container - メッセージを表示するコンテナ要素。
+     * @param {string} message - 表示するメッセージ。
+     * @param {boolean} isError - エラーメッセージかどうか。
      */
+    const logToContainer = (container, message, isError = false) => {
+        const p = document.createElement('p');
+        p.textContent = message;
+        if (isError) {
+            p.style.color = 'red';
+            p.style.fontWeight = 'bold';
+        }
+        container.appendChild(p);
+    };
+
     const parseMarkdown = (text) => {
         const parts = text.split('---');
         if (parts.length < 3) {
@@ -23,19 +34,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 metadata[key.trim()] = value.join(':').trim();
             }
         });
-
         return { metadata, content };
     };
 
-    /**
-     * コンテンツカードのHTML要素を作成します。
-     * @param {object} item - メタデータとコンテンツを含むオブジェクト。
-     * @returns {HTMLElement} 作成されたカード要素。
-     */
     const createContentCard = (item) => {
         const card = document.createElement('div');
-        // 'event-card' クラスを汎用的な 'content-card' に変更し、クリックイベントの対象とします。
-        card.className = 'event-card content-card'; 
+        card.className = 'event-card content-card';
         card.dataset.content = item.content;
         card.dataset.title = item.metadata.title || 'No Title';
 
@@ -48,14 +52,15 @@ document.addEventListener('DOMContentLoaded', () => {
         return card;
     };
 
-    /**
-     * 指定されたカテゴリのコンテンツを動的に読み込んで表示します。
-     * @param {string} category - 読み込むコンテンツのカテゴリ (例: 'events')。
-     * @param {string} containerId - コンテンツカードを表示するコンテナのID。
-     */
     const loadCategory = async (category, containerId) => {
         const container = document.getElementById(containerId);
-        if (!container) return;
+        if (!container) {
+            console.error(`Container with ID "${containerId}" not found.`);
+            return;
+        }
+
+        container.innerHTML = ''; // コンテナをクリア
+        logToContainer(container, `[${category}] Loading...`);
 
         let allItems = [];
         let index = 1;
@@ -63,45 +68,52 @@ document.addEventListener('DOMContentLoaded', () => {
             const fileNumber = String(index).padStart(3, '0');
             const filePath = `${category}/${fileNumber}.md`;
             
+            logToContainer(container, `[${category}] Fetching: ${filePath}...`);
+
             try {
                 const response = await fetch(filePath);
                 if (!response.ok) {
-                    // 404 Not Foundなどのエラーの場合はループを終了
+                    logToContainer(container, `[${category}] ...File not found or error (Status: ${response.status}). Stopping search for this category.`, true);
                     break;
                 }
+                
+                logToContainer(container, `[${category}] ...Success!`);
                 const text = await response.text();
                 const parsed = parseMarkdown(text);
-                if (parsed.metadata.title) { // タイトルがあるものだけを対象とする
+                if (parsed.metadata.title) {
                     allItems.push(parsed);
                 }
             } catch (error) {
-                console.error(`Error fetching file: ${filePath}`, error);
+                logToContainer(container, `[${category}] ...Fetch failed with a network error: ${error}. Stopping.`, true);
                 break;
             }
             index++;
         }
 
-        // 日付の降順でソート（日付がないものは最後に）
+        // カードを生成する前にデバッグメッセージをクリア
+        container.innerHTML = '';
+
+        if (allItems.length === 0) {
+            logToContainer(container, `[${category}] No items found.`, true);
+            return;
+        }
+
         allItems.sort((a, b) => {
             if (!a.metadata.date) return 1;
             if (!b.metadata.date) return -1;
             return new Date(b.metadata.date) - new Date(a.metadata.date);
         });
-
-        // コンテナをクリアしてからカードを追加
-        container.innerHTML = ''; 
+        
         allItems.forEach(item => {
             container.appendChild(createContentCard(item));
         });
     };
 
-    // モーダル関連のイベントリスナー
     const mainContainer = document.querySelector('main');
     mainContainer.addEventListener('click', (e) => {
         const card = e.target.closest('.content-card');
         if (card) {
             const title = card.dataset.title;
-            // marked.js を使ってMarkdownをHTMLに変換
             const contentHtml = marked.parse(card.dataset.content);
             modalBody.innerHTML = `<h1>${title}</h1>${contentHtml}`;
             modal.style.display = 'block';
@@ -118,7 +130,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // 各カテゴリのコンテンツを読み込む
     loadCategory('events', 'events-cards-container');
     loadCategory('news', 'news-cards-container');
     loadCategory('projects', 'projects-cards-container');
