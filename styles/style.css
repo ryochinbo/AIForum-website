@@ -340,9 +340,9 @@ main {
   display: inline-block;
   font-size: 0.72rem;
   font-weight: 600;
-  color: var(--main-color);
-  background-color: #eff6ff;
-  border: 1px solid #bfdbfe;
+  color: #1e3a8a;
+  background-color: #e8edf5;
+  border: 1px solid #c7d2e8;
   border-radius: 9999px;
   padding: 0.1rem 0.55rem;
   text-decoration: none;
