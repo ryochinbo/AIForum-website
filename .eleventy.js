@@ -1,4 +1,10 @@
 module.exports = function(eleventyConfig) {
+  // ドキュメントファイルをビルド対象から除外
+  eleventyConfig.ignores.add("README.md");
+  eleventyConfig.ignores.add("CLAUDE.md");
+  eleventyConfig.ignores.add("design.md");
+  eleventyConfig.ignores.add("plan.md");
+
   // 静的ファイルのコピー
   eleventyConfig.addPassthroughCopy("images");
   eleventyConfig.addPassthroughCopy("styles");
