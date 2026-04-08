@@ -22,23 +22,19 @@ permalink: /
   <!-- 最新の投稿セクション -->
   <section id="posts" class="section">
     <h2>最新の投稿</h2>
-    <div class="news-list">
-      {% for post in collections.posts | slice(0, 5) %}
-      <article class="news-item">
-        <div class="news-thumbnail">
-          <a href="{{ post.url | url }}">
-            {% if post.data.thumbnail %}
-              <img src="{{ (post.url ~ post.data.thumbnail.slice(2)) | url }}" alt="{{ post.data.title }}">
-            {% else %}
-              <img src="{{ '/images/common/default-thumbnail.svg' | url }}" alt="{{ post.data.title }}">
-            {% endif %}
-          </a>
+    <div class="post-card-grid">
+      {% for post in collections.posts | slice(0, 3) %}
+      <a href="{{ post.url | url }}" class="post-card">
+        <div class="post-card-thumbnail">
+          {% if post.data.thumbnail %}
+            <img src="{{ (post.url ~ post.data.thumbnail.slice(2)) | url }}" alt="{{ post.data.title }}">
+          {% else %}
+            <img src="{{ '/images/common/default-thumbnail.svg' | url }}" alt="{{ post.data.title }}">
+          {% endif %}
         </div>
-        <div class="news-content">
-          <h3 class="news-title">
-            <a href="{{ post.url | url }}">{{ post.data.title }}</a>
-          </h3>
-          <div class="news-meta">
+        <div class="post-card-content">
+          <h3 class="post-card-title">{{ post.data.title }}</h3>
+          <div class="post-card-meta">
             <time datetime="{{ post.date | dateAttr }}">{{ post.date | dateDisplay }}</time>
             {% if post.data.tags %}
               {% for tag in post.data.tags %}
@@ -47,14 +43,14 @@ permalink: /
             {% endif %}
           </div>
           {% if post.data.description %}
-            <p class="news-excerpt">{{ post.data.description }}</p>
+            <p class="post-card-excerpt">{{ post.data.description }}</p>
           {% endif %}
         </div>
-      </article>
+      </a>
       {% endfor %}
     </div>
-    <p style="text-align:center; margin-top:1.5rem;">
-      <a href="{{ '/posts/' | url }}" class="btn-primary">投稿一覧を見る →</a>
+    <p class="posts-more-link">
+      <a href="{{ '/posts/' | url }}" class="btn-primary">全ての投稿を見る →</a>
     </p>
   </section>
 
