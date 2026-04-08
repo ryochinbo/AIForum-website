@@ -1,0 +1,43 @@
+---
+title: 投稿一覧
+layout: base.njk
+permalink: /posts/
+eleventyExcludeFromCollections: true
+---
+
+<div class="container">
+  <section class="section">
+    <h2>投稿一覧</h2>
+    <div class="news-list">
+      {% for post in collections.posts %}
+      <article class="news-item">
+        <div class="news-thumbnail">
+          <a href="{{ post.url | url }}">
+            {% if post.data.thumbnail %}
+              <img src="{{ (post.url ~ post.data.thumbnail.slice(2)) | url }}" alt="{{ post.data.title }}">
+            {% else %}
+              <img src="{{ '/images/common/default-thumbnail.svg' | url }}" alt="{{ post.data.title }}">
+            {% endif %}
+          </a>
+        </div>
+        <div class="news-content">
+          <h3 class="news-title">
+            <a href="{{ post.url | url }}">{{ post.data.title }}</a>
+          </h3>
+          <div class="news-meta">
+            <time datetime="{{ post.date | dateAttr }}">{{ post.date | dateDisplay }}</time>
+            {% if post.data.tags %}
+              {% for tag in post.data.tags %}
+                <span class="tag-pill">{{ tag }}</span>
+              {% endfor %}
+            {% endif %}
+          </div>
+          {% if post.data.description %}
+            <p class="news-excerpt">{{ post.data.description }}</p>
+          {% endif %}
+        </div>
+      </article>
+      {% endfor %}
+    </div>
+  </section>
+</div>

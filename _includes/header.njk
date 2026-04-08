@@ -1,0 +1,29 @@
+<nav class="navbar">
+  <a href="{{ '/' | url }}" class="logo">AIForum</a>
+  <div class="hamburger" id="hamburger" aria-label="メニューを開く" role="button" tabindex="0">&#9776;</div>
+  <div class="menu" id="menu">
+    <a href="{{ '/#about' | url }}">コミュニティについて</a>
+    <a href="{{ '/posts/' | url }}">投稿一覧</a>
+    <a href="{{ '/#contact' | url }}">お問い合わせ</a>
+  </div>
+</nav>
+<script>
+  (function() {
+    var hamburger = document.getElementById('hamburger');
+    var menu = document.getElementById('menu');
+    hamburger.addEventListener('click', function(e) {
+      e.stopPropagation();
+      menu.classList.toggle('active');
+    });
+    document.addEventListener('click', function(e) {
+      if (!menu.contains(e.target) && e.target !== hamburger) {
+        menu.classList.remove('active');
+      }
+    });
+    menu.querySelectorAll('a').forEach(function(link) {
+      link.addEventListener('click', function() {
+        menu.classList.remove('active');
+      });
+    });
+  })();
+</script>
