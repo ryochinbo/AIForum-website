@@ -39,6 +39,11 @@ module.exports = function(eleventyConfig) {
     return d.toISOString().split("T")[0];
   });
 
+  // 配列スライスフィルター（Nunjucksに slice がないため）
+  eleventyConfig.addFilter("slice", function(array, start, end) {
+    return array.slice(start, end);
+  });
+
   return {
     pathPrefix: "/AIForum-website/",
     dir: {
