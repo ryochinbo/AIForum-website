@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(cat /tmp/challenge-club-homepage/.github/workflows/*.yml)",
+      "WebFetch(domain:github.com)",
+      "Bash(curl -s -x http://proxy.mei.co.jp:8080 https://github.com/ChallengeClub/challenge-club-homepage)",
+      "Bash(curl:*)",
+      "Bash(git add:*)",
+      "Bash(git commit -m ':*)"
+    ]
+  }
+}
