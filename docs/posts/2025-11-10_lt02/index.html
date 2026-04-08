@@ -4,13 +4,26 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>第2回 LT会 | AIForum</title>
-  <meta name="description" content="LLM as a Judge による評価技術、AIエージェント（Claude Code / Codex CLI / Gemini CLI）のデモ紹介、2件のLTを実施しました。">
+  <meta name="description" content="AIに関する活用事例とAIと開発するプログラミングのデモ（開催場所: 対面）">
+
+  <!-- OGP -->
+  <meta property="og:title" content="第2回 LT会 | AIForum">
+  <meta property="og:description" content="AIに関する活用事例とAIと開発するプログラミングのデモ（開催場所: 対面）">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="AIForum">
+  <meta name="twitter:card" content="summary">
+
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Noto+Sans+JP:wght@400;600;700&display=swap" rel="stylesheet">
+
   <link rel="stylesheet" href="/AIForum-website/styles/style.css">
 </head>
 <body>
+  <!-- 読了プログレスバー -->
+  <div class="progress-bar" id="progress-bar"></div>
+
   <nav class="navbar">
   <a href="/AIForum-website/" class="logo">AIForum</a>
   <div class="hamburger" id="hamburger" aria-label="メニューを開く" role="button" tabindex="0">&#9776;</div>
@@ -50,34 +63,67 @@
   <span class="tag-pill">イベント</span>
 </div>
 <h1>第2回 LT会</h1>
-<p>第2回 AIForum LT会を開催しました。今回は2件のライトニングトークが行われました。</p>
-<h2>LT① LLM as a Judge を用いた評価技術</h2>
-<p>LLM（大規模言語モデル）自体を評価者として活用する「LLM as a Judge」の手法を取り上げました。世の中での使われ方から、実際の開発方法まで幅広く紹介しました。</p>
-<ul>
-<li>LLM as a Judge の概要と活用事例（RAG評価、チャットボット品質測定など）</li>
-<li>評価ルーブリックの設計方法とプロンプトへの落とし込み</li>
-<li>Excelデータに対してLLMで一括評価を行う処理フローの実装方法</li>
-</ul>
-<h2>LT② AIエージェントについて</h2>
-<p>Claude Code・Codex CLI・Gemini CLI といった最新のAIエージェントツールを紹介し、実際にエージェントを動かすデモを披露しました。</p>
-<ul>
-<li>各ツール（Claude Code / Codex CLI / Gemini CLI）の特徴と比較</li>
-<li>フォルダ整理タスクをエージェントに任せるデモ</li>
-<li>ミニ業務効率化アプリをエージェントに作らせるライブデモ</li>
-</ul>
-<p>発表資料はこちらからご覧いただけます。</p>
-<script async class="docswell-embed" src="https://www.docswell.com/assets/libs/docswell-embed/docswell-embed.min.js" data-src="https://www.docswell.com/slide/K4419J/embed" data-aspect="0.5625"></script><div class="docswell-link"><a href="https://www.docswell.com/s/Ryochinbo/K4419J-2025-11-08-165555">LT_コマンドラインAIエージェントとは by @Ryochinbo</a></div>
-<hr>
-<p>次回のLT会も随時開催予定です。発表に興味のある方はぜひご連絡ください。</p>
+<p>AIに関する活用事例と、AIと協力して開発するプログラミングのデモを行いました。</p>
 </article>
 </div>
 
   </main>
   <footer>
-  <div class="container">
-    <p>&copy; 2026 AIForum. All Rights Reserved.</p>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <a href="/AIForum-website/" class="footer-logo">AIForum</a>
+      <p>AIに関する情報交換・勉強会を通じて、<br>メンバーが学び、成長できるコミュニティ。</p>
+    </div>
+    <nav class="footer-nav">
+      <p class="footer-nav-title">Links</p>
+      <a href="/AIForum-website/#about">コミュニティについて</a>
+      <a href="/AIForum-website/posts/">投稿一覧</a>
+      <a href="/AIForum-website/#contact">お問い合わせ</a>
+    </nav>
+  </div>
+  <div class="footer-bottom">
+    &copy; 2026 AIForum. All Rights Reserved.
   </div>
 </footer>
 
+
+  <!-- ページトップへ戻るボタン -->
+  <button class="back-to-top" id="back-to-top" aria-label="ページトップへ戻る">&#8679;</button>
+
+  <script>
+    (function() {
+      // プログレスバー
+      var bar = document.getElementById('progress-bar');
+      // トップへ戻るボタン
+      var btn = document.getElementById('back-to-top');
+
+      function onScroll() {
+        var scrollTop = window.scrollY || document.documentElement.scrollTop;
+        var docHeight = document.documentElement.scrollHeight - window.innerHeight;
+
+        // プログレスバー（記事ページのみ意味を持つが全ページで動作）
+        if (bar && docHeight > 0) {
+          bar.style.width = Math.round((scrollTop / docHeight) * 100) + '%';
+        }
+
+        // トップへ戻るボタン
+        if (btn) {
+          if (scrollTop > 300) {
+            btn.classList.add('visible');
+          } else {
+            btn.classList.remove('visible');
+          }
+        }
+      }
+
+      window.addEventListener('scroll', onScroll, { passive: true });
+
+      if (btn) {
+        btn.addEventListener('click', function() {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+      }
+    })();
+  </script>
 </body>
 </html>

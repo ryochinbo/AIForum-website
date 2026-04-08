@@ -5,12 +5,25 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>第3回 LT会 | AIForum</title>
   <meta name="description" content="ExcelにLLMカスタム関数を組み込んだ自動化、ローカルで動くRAGの自作方法、2件のLTを実施しました。">
+
+  <!-- OGP -->
+  <meta property="og:title" content="第3回 LT会 | AIForum">
+  <meta property="og:description" content="ExcelにLLMカスタム関数を組み込んだ自動化、ローカルで動くRAGの自作方法、2件のLTを実施しました。">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="AIForum">
+  <meta name="twitter:card" content="summary">
+
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Noto+Sans+JP:wght@400;600;700&display=swap" rel="stylesheet">
+
   <link rel="stylesheet" href="/AIForum-website/styles/style.css">
 </head>
 <body>
+  <!-- 読了プログレスバー -->
+  <div class="progress-bar" id="progress-bar"></div>
+
   <nav class="navbar">
   <a href="/AIForum-website/" class="logo">AIForum</a>
   <div class="hamburger" id="hamburger" aria-label="メニューを開く" role="button" tabindex="0">&#9776;</div>
@@ -72,10 +85,61 @@
 
   </main>
   <footer>
-  <div class="container">
-    <p>&copy; 2026 AIForum. All Rights Reserved.</p>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <a href="/AIForum-website/" class="footer-logo">AIForum</a>
+      <p>AIに関する情報交換・勉強会を通じて、<br>メンバーが学び、成長できるコミュニティ。</p>
+    </div>
+    <nav class="footer-nav">
+      <p class="footer-nav-title">Links</p>
+      <a href="/AIForum-website/#about">コミュニティについて</a>
+      <a href="/AIForum-website/posts/">投稿一覧</a>
+      <a href="/AIForum-website/#contact">お問い合わせ</a>
+    </nav>
+  </div>
+  <div class="footer-bottom">
+    &copy; 2026 AIForum. All Rights Reserved.
   </div>
 </footer>
 
+
+  <!-- ページトップへ戻るボタン -->
+  <button class="back-to-top" id="back-to-top" aria-label="ページトップへ戻る">&#8679;</button>
+
+  <script>
+    (function() {
+      // プログレスバー
+      var bar = document.getElementById('progress-bar');
+      // トップへ戻るボタン
+      var btn = document.getElementById('back-to-top');
+
+      function onScroll() {
+        var scrollTop = window.scrollY || document.documentElement.scrollTop;
+        var docHeight = document.documentElement.scrollHeight - window.innerHeight;
+
+        // プログレスバー（記事ページのみ意味を持つが全ページで動作）
+        if (bar && docHeight > 0) {
+          bar.style.width = Math.round((scrollTop / docHeight) * 100) + '%';
+        }
+
+        // トップへ戻るボタン
+        if (btn) {
+          if (scrollTop > 300) {
+            btn.classList.add('visible');
+          } else {
+            btn.classList.remove('visible');
+          }
+        }
+      }
+
+      window.addEventListener('scroll', onScroll, { passive: true });
+
+      if (btn) {
+        btn.addEventListener('click', function() {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+      }
+    })();
+  </script>
 </body>
 </html>

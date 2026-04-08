@@ -5,12 +5,25 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>AIForum | AIForum</title>
   <meta name="description" content="AIForumは、AIに関する情報交換、勉強会、イベントを通じて、メンバーが学び、成長できるコミュニティです。">
+
+  <!-- OGP -->
+  <meta property="og:title" content="AIForum | AIForum">
+  <meta property="og:description" content="AIForumは、AIに関する情報交換、勉強会、イベントを通じて、メンバーが学び、成長できるコミュニティです。">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="AIForum">
+  <meta name="twitter:card" content="summary">
+
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Noto+Sans+JP:wght@400;600;700&display=swap" rel="stylesheet">
+
   <link rel="stylesheet" href="/AIForum-website/styles/style.css">
 </head>
 <body>
+  <!-- 読了プログレスバー -->
+  <div class="progress-bar" id="progress-bar"></div>
+
   <nav class="navbar">
   <a href="/AIForum-website/" class="logo">AIForum</a>
   <div class="hamburger" id="hamburger" aria-label="メニューを開く" role="button" tabindex="0">&#9776;</div>
@@ -44,8 +57,15 @@
   <main>
     
 <header class="hero-header">
-  <h1>AIForum</h1>
-  <p>AIに関する情報交換・勉強会コミュニティ</p>
+  <div class="hero-inner">
+    <div class="hero-badge">AI Community</div>
+    <h1>AIForum</h1>
+    <p>AIに関する情報交換・勉強会を通じて、<br>メンバーが学び、成長できるコミュニティ。</p>
+    <div class="hero-cta">
+      <a href="/AIForum-website/posts/" class="btn-primary">投稿一覧を見る →</a>
+      <a href="/AIForum-website/#about" class="btn-ghost">コミュニティについて</a>
+    </div>
+  </div>
 </header>
 
 <div class="container">
@@ -54,86 +74,14 @@
   <section id="about" class="section">
     <h2>コミュニティについて</h2>
     <p>AIForumは、AIに関する情報交換、勉強会、イベントを通じて、メンバーが学び、成長できるコミュニティです。</p>
-    <p style="font-weight:600; font-size:1.1rem; color:#374151;">年齢や役職にとらわれず、誰もが気軽に相談し、やる気を充電できる「サードプレイス」を目指しています。</p>
-    <p style="color:#6b7280;">AI初学者から現役エンジニアまで、AIに興味とやる気がある方ならどなたでも歓迎します。</p>
+    <p style="font-weight:600; font-size:1.05rem;">年齢や役職にとらわれず、誰もが気軽に相談し、やる気を充電できる「サードプレイス」を目指しています。</p>
+    <p style="color:var(--text-muted);">AI初学者から現役エンジニアまで、AIに興味とやる気がある方ならどなたでも歓迎します。</p>
   </section>
 
   <!-- 最新の投稿セクション -->
   <section id="posts" class="section">
     <h2>最新の投稿</h2>
     <div class="post-card-grid">
-      
-      <a href="/AIForum-website/posts/2025-12-22_lt03/" class="post-card">
-        <div class="post-card-thumbnail">
-          
-            <img src="/AIForum-website/images/common/default-thumbnail.svg" alt="第3回 LT会">
-          
-        </div>
-        <div class="post-card-content">
-          <h3 class="post-card-title">第3回 LT会</h3>
-          <div class="post-card-meta">
-            <time datetime="2025-12-22">2025/12/22</time>
-            
-              
-                <span class="tag-pill">LT会</span>
-              
-                <span class="tag-pill">イベント</span>
-              
-            
-          </div>
-          
-            <p class="post-card-excerpt">ExcelにLLMカスタム関数を組み込んだ自動化、ローカルで動くRAGの自作方法、2件のLTを実施しました。</p>
-          
-        </div>
-      </a>
-      
-      <a href="/AIForum-website/posts/2025-11-10_lt02/" class="post-card">
-        <div class="post-card-thumbnail">
-          
-            <img src="/AIForum-website/images/common/default-thumbnail.svg" alt="第2回 LT会">
-          
-        </div>
-        <div class="post-card-content">
-          <h3 class="post-card-title">第2回 LT会</h3>
-          <div class="post-card-meta">
-            <time datetime="2025-11-10">2025/11/10</time>
-            
-              
-                <span class="tag-pill">LT会</span>
-              
-                <span class="tag-pill">イベント</span>
-              
-            
-          </div>
-          
-            <p class="post-card-excerpt">LLM as a Judge による評価技術、AIエージェント（Claude Code / Codex CLI / Gemini CLI）のデモ紹介、2件のLTを実施しました。</p>
-          
-        </div>
-      </a>
-      
-      <a href="/AIForum-website/posts/2025-09-01_lt01/" class="post-card">
-        <div class="post-card-thumbnail">
-          
-            <img src="/AIForum-website/images/common/default-thumbnail.svg" alt="第1回 LT会">
-          
-        </div>
-        <div class="post-card-content">
-          <h3 class="post-card-title">第1回 LT会</h3>
-          <div class="post-card-meta">
-            <time datetime="2025-09-01">2025/09/01</time>
-            
-              
-                <span class="tag-pill">LT会</span>
-              
-                <span class="tag-pill">イベント</span>
-              
-            
-          </div>
-          
-            <p class="post-card-excerpt">生成AIを用いた特許文書の整理、材料開発におけるデータサイエンスコンペの活用事例、2件のLTを実施しました。</p>
-          
-        </div>
-      </a>
       
     </div>
     <p class="posts-more-link">
@@ -150,17 +98,68 @@
         LinkedIn でご連絡
       </a>
     </p>
-    <p style="color:#6b7280; margin-top:0.5rem;">担当: 井上凌一</p>
+    <p style="color:var(--text-muted); margin-top:var(--sp-4);">担当: 井上凌一</p>
   </section>
 
 </div>
 
   </main>
   <footer>
-  <div class="container">
-    <p>&copy; 2026 AIForum. All Rights Reserved.</p>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <a href="/AIForum-website/" class="footer-logo">AIForum</a>
+      <p>AIに関する情報交換・勉強会を通じて、<br>メンバーが学び、成長できるコミュニティ。</p>
+    </div>
+    <nav class="footer-nav">
+      <p class="footer-nav-title">Links</p>
+      <a href="/AIForum-website/#about">コミュニティについて</a>
+      <a href="/AIForum-website/posts/">投稿一覧</a>
+      <a href="/AIForum-website/#contact">お問い合わせ</a>
+    </nav>
+  </div>
+  <div class="footer-bottom">
+    &copy; 2026 AIForum. All Rights Reserved.
   </div>
 </footer>
 
+
+  <!-- ページトップへ戻るボタン -->
+  <button class="back-to-top" id="back-to-top" aria-label="ページトップへ戻る">&#8679;</button>
+
+  <script>
+    (function() {
+      // プログレスバー
+      var bar = document.getElementById('progress-bar');
+      // トップへ戻るボタン
+      var btn = document.getElementById('back-to-top');
+
+      function onScroll() {
+        var scrollTop = window.scrollY || document.documentElement.scrollTop;
+        var docHeight = document.documentElement.scrollHeight - window.innerHeight;
+
+        // プログレスバー（記事ページのみ意味を持つが全ページで動作）
+        if (bar && docHeight > 0) {
+          bar.style.width = Math.round((scrollTop / docHeight) * 100) + '%';
+        }
+
+        // トップへ戻るボタン
+        if (btn) {
+          if (scrollTop > 300) {
+            btn.classList.add('visible');
+          } else {
+            btn.classList.remove('visible');
+          }
+        }
+      }
+
+      window.addEventListener('scroll', onScroll, { passive: true });
+
+      if (btn) {
+        btn.addEventListener('click', function() {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+      }
+    })();
+  </script>
 </body>
 </html>
