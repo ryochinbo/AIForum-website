@@ -1,5 +1,17 @@
 <footer>
-  <div class="container">
-    <p>&copy; {{ currentYear }} AIForum. All Rights Reserved.</p>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <a href="{{ '/' | url }}" class="footer-logo">AIForum</a>
+      <p>AIに関する情報交換・勉強会を通じて、<br>メンバーが学び、成長できるコミュニティ。</p>
+    </div>
+    <nav class="footer-nav">
+      <p class="footer-nav-title">Links</p>
+      <a href="{{ '/#about' | url }}">コミュニティについて</a>
+      <a href="{{ '/posts/' | url }}">投稿一覧</a>
+      <a href="{{ '/#contact' | url }}">お問い合わせ</a>
+    </nav>
+  </div>
+  <div class="footer-bottom">
+    &copy; {{ currentYear }} AIForum. All Rights Reserved.
   </div>
 </footer>
