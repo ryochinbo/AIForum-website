@@ -5,16 +5,68 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{% if title %}{{ title }} | {{ site.name }}{% else %}{{ site.defaultTitle }}{% endif %}</title>
   <meta name="description" content="{% if description %}{{ description }}{% else %}{{ site.defaultDescription }}{% endif %}">
+
+  <!-- OGP -->
+  <meta property="og:title" content="{% if title %}{{ title }} | {{ site.name }}{% else %}{{ site.defaultTitle }}{% endif %}">
+  <meta property="og:description" content="{% if description %}{{ description }}{% else %}{{ site.defaultDescription }}{% endif %}">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="{{ site.name }}">
+  <meta name="twitter:card" content="summary">
+
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Noto+Sans+JP:wght@400;600;700&display=swap" rel="stylesheet">
+
   <link rel="stylesheet" href="{{ '/styles/style.css' | url }}">
 </head>
 <body>
+  <!-- 読了プログレスバー -->
+  <div class="progress-bar" id="progress-bar"></div>
+
   {% include "header.njk" %}
   <main>
     {{ content | safe }}
   </main>
   {% include "footer.njk" %}
+
+  <!-- ページトップへ戻るボタン -->
+  <button class="back-to-top" id="back-to-top" aria-label="ページトップへ戻る">&#8679;</button>
+
+  <script>
+    (function() {
+      // プログレスバー
+      var bar = document.getElementById('progress-bar');
+      // トップへ戻るボタン
+      var btn = document.getElementById('back-to-top');
+
+      function onScroll() {
+        var scrollTop = window.scrollY || document.documentElement.scrollTop;
+        var docHeight = document.documentElement.scrollHeight - window.innerHeight;
+
+        // プログレスバー（記事ページのみ意味を持つが全ページで動作）
+        if (bar && docHeight > 0) {
+          bar.style.width = Math.round((scrollTop / docHeight) * 100) + '%';
+        }
+
+        // トップへ戻るボタン
+        if (btn) {
+          if (scrollTop > 300) {
+            btn.classList.add('visible');
+          } else {
+            btn.classList.remove('visible');
+          }
+        }
+      }
+
+      window.addEventListener('scroll', onScroll, { passive: true });
+
+      if (btn) {
+        btn.addEventListener('click', function() {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+      }
+    })();
+  </script>
 </body>
 </html>

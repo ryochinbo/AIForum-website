@@ -29,6 +29,9 @@ jobs:
       - name: 依存パッケージをインストール
         run: npm ci
 
+      - name: 旧ビルド成果物を削除（クリーンビルド）
+        run: rm -rf docs/
+
       - name: Eleventy でビルド
         run: npm run build
 
