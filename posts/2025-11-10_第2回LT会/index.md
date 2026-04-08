@@ -5,8 +5,8 @@ date: 2025-11-10
 tags: [LT会, イベント]
 layout: base.njk
 permalink: "/posts/2025-11-10_lt02/"
+thumbnail: "./image.png"
 ---
-
 <div class="section">
 <article>
 
