@@ -2,17 +2,17 @@
 /* 1. Variables                                                 */
 /*──────────────────────────────────────────────────────────────*/
 :root {
-  --main-color:   #3b82f6;              /* AIForum Blue */
-  --accent-color: #2563eb;              /* Blue Dark (hover) */
-  --bg-color:     #f0f2f5;              /* ページ背景 */
-  --text-color:   #333333;              /* 本文テキスト */
-  --text-muted:   #6b7280;             /* 日付・メタ情報 */
+  --main-color:   #1e40af;              /* Deep Navy Blue（落ち着いた深青） */
+  --accent-color: #1e3a8a;              /* Dark Navy（ホバー・アクセント） */
+  --bg-color:     #f1f5f9;              /* Slate Gray（クールな背景） */
+  --text-color:   #0f172a;              /* Near Black with blue tint */
+  --text-muted:   #64748b;             /* Slate（メタ情報） */
   --white:        #ffffff;
-  --nav-bg:       rgba(255,255,255,0.95);
-  --footer-bg:    #111827;
-  --shadow-sm:    0 1px 3px rgba(0,0,0,0.1);
-  --shadow-md:    0 4px 6px rgba(0,0,0,0.1);
-  --shadow-lg:    0 10px 20px rgba(0,0,0,0.15);
+  --nav-bg:       #0f172a;              /* ダークネイビー（黒ナビ） */
+  --footer-bg:    #0f172a;              /* ナビと統一 */
+  --shadow-sm:    0 1px 3px rgba(15,23,42,0.08);
+  --shadow-md:    0 4px 12px rgba(15,23,42,0.10);
+  --shadow-lg:    0 10px 24px rgba(15,23,42,0.15);
   --border-radius: 8px;
 }
 
