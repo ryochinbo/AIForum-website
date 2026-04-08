@@ -1,0 +1,447 @@
+/*──────────────────────────────────────────────────────────────*/
+/* 1. Variables                                                 */
+/*──────────────────────────────────────────────────────────────*/
+:root {
+  --main-color:   #3b82f6;              /* AIForum Blue */
+  --accent-color: #2563eb;              /* Blue Dark (hover) */
+  --bg-color:     #f0f2f5;              /* ページ背景 */
+  --text-color:   #333333;              /* 本文テキスト */
+  --text-muted:   #6b7280;             /* 日付・メタ情報 */
+  --white:        #ffffff;
+  --nav-bg:       rgba(255,255,255,0.95);
+  --footer-bg:    #111827;
+  --shadow-sm:    0 1px 3px rgba(0,0,0,0.1);
+  --shadow-md:    0 4px 6px rgba(0,0,0,0.1);
+  --shadow-lg:    0 10px 20px rgba(0,0,0,0.15);
+  --border-radius: 8px;
+}
+
+/*──────────────────────────────────────────────────────────────*/
+/* 2. Reset & Base                                              */
+/*──────────────────────────────────────────────────────────────*/
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+a {
+  color: var(--main-color);
+}
+
+/*──────────────────────────────────────────────────────────────*/
+/* 3. Layout                                                    */
+/*──────────────────────────────────────────────────────────────*/
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+main {
+  padding-top: 60px; /* ナビバー高さ分オフセット */
+}
+
+/*──────────────────────────────────────────────────────────────*/
+/* 4. Navbar                                                    */
+/*──────────────────────────────────────────────────────────────*/
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 60px;
+  background-color: var(--nav-bg);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 1.5rem;
+  box-shadow: var(--shadow-sm);
+  z-index: 1000;
+}
+
+.navbar .logo {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--main-color);
+  text-decoration: none;
+  letter-spacing: -0.02em;
+}
+
+/* ハンバーガーボタン: モバイルのみ表示 */
+.hamburger {
+  display: block;
+  font-size: 1.6rem;
+  cursor: pointer;
+  color: var(--main-color);
+  user-select: none;
+  line-height: 1;
+}
+
+/* ナビリンク群: モバイルはドロップダウン */
+.menu {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 60px;
+  left: 0;
+  width: 100%;
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  background-color: var(--nav-bg);
+  box-shadow: var(--shadow-md);
+  padding: 0 1.5rem;
+  transition: max-height 0.3s ease, opacity 0.3s ease;
+  z-index: 999;
+}
+
+.menu.active {
+  max-height: 300px;
+  opacity: 1;
+  padding: 1rem 1.5rem;
+}
+
+.menu a {
+  color: var(--text-color);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+  padding: 0.6rem 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.menu a:last-child {
+  border-bottom: none;
+}
+
+.menu a:hover {
+  color: var(--main-color);
+}
+
+/* PC: 横並びナビ */
+@media (min-width: 768px) {
+  .hamburger {
+    display: none;
+  }
+
+  .menu {
+    flex-direction: row;
+    position: static;
+    max-height: none;
+    opacity: 1;
+    overflow: visible;
+    width: auto;
+    padding: 0;
+    box-shadow: none;
+    gap: 2rem;
+    transition: none;
+  }
+
+  .menu a {
+    padding: 0;
+    border-bottom: none;
+  }
+}
+
+/*──────────────────────────────────────────────────────────────*/
+/* 5. Hero Header                                               */
+/*──────────────────────────────────────────────────────────────*/
+.hero-header {
+  background: linear-gradient(135deg, var(--main-color) 0%, var(--accent-color) 100%);
+  color: var(--white);
+  text-align: center;
+  padding: 5rem 1.5rem 3.5rem;
+}
+
+.hero-header h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin: 0 0 0.75rem;
+  letter-spacing: -0.02em;
+}
+
+.hero-header p {
+  font-size: 1.1rem;
+  opacity: 0.9;
+  margin: 0;
+}
+
+@media (max-width: 767px) {
+  .hero-header h1 {
+    font-size: 2rem;
+  }
+}
+
+/*──────────────────────────────────────────────────────────────*/
+/* 6. Sections                                                  */
+/*──────────────────────────────────────────────────────────────*/
+.section {
+  background: var(--white);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-md);
+  padding: 2rem;
+  margin: 2rem auto;
+  max-width: 960px;
+}
+
+/* sectionをcontainerでラップしない場合の横幅制御 */
+.section {
+  margin-left: 1.5rem;
+  margin-right: 1.5rem;
+}
+
+@media (min-width: 1000px) {
+  .section {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+.section h2 {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--accent-color);
+  border-bottom: 2px solid var(--main-color);
+  padding-bottom: 0.5rem;
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+}
+
+.section h3 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--text-color);
+  margin-bottom: 0.5rem;
+}
+
+.section p {
+  font-size: 1rem;
+  line-height: 1.75;
+  margin-bottom: 1rem;
+}
+
+.section ul, .section ol {
+  padding-left: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.section li {
+  margin-bottom: 0.4rem;
+  line-height: 1.65;
+}
+
+/*──────────────────────────────────────────────────────────────*/
+/* 7. News / Post Cards                                         */
+/*──────────────────────────────────────────────────────────────*/
+.news-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.news-item {
+  display: flex;
+  gap: 1rem;
+  padding: 1rem;
+  background: var(--white);
+  border: 1px solid #e5e7eb;
+  border-radius: var(--border-radius);
+  transition: box-shadow 0.2s ease;
+  text-decoration: none;
+  color: inherit;
+}
+
+.news-item:hover {
+  box-shadow: var(--shadow-md);
+}
+
+.news-thumbnail {
+  flex-shrink: 0;
+  width: 120px;
+  height: 80px;
+}
+
+.news-thumbnail img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 4px;
+  display: block;
+}
+
+.news-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.news-title {
+  margin: 0 0 0.3rem;
+}
+
+.news-title a {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-color);
+  text-decoration: none;
+  line-height: 1.4;
+  display: block;
+}
+
+.news-title a:hover {
+  color: var(--main-color);
+}
+
+.news-meta {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-bottom: 0.4rem;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.news-excerpt {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  margin: 0;
+  line-height: 1.5;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+@media (max-width: 767px) {
+  .news-thumbnail {
+    width: 80px;
+    height: 56px;
+  }
+}
+
+/*──────────────────────────────────────────────────────────────*/
+/* 8. Tag Pills                                                 */
+/*──────────────────────────────────────────────────────────────*/
+.tag-pill {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--main-color);
+  background-color: #eff6ff;
+  border: 1px solid #bfdbfe;
+  border-radius: 9999px;
+  padding: 0.1rem 0.55rem;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+/*──────────────────────────────────────────────────────────────*/
+/* 9. Buttons                                                   */
+/*──────────────────────────────────────────────────────────────*/
+.btn-primary {
+  display: inline-block;
+  background-color: var(--main-color);
+  color: var(--white);
+  padding: 0.6rem 1.5rem;
+  border-radius: 9999px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  text-decoration: none;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-primary:hover {
+  background-color: var(--accent-color);
+  transform: translateY(-1px);
+  color: var(--white);
+}
+
+/*──────────────────────────────────────────────────────────────*/
+/* 10. Post Content (記事本文内)                                */
+/*──────────────────────────────────────────────────────────────*/
+.post-meta {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.section img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 1.5rem auto;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-sm);
+}
+
+.section iframe {
+  display: block;
+  width: 100%;
+  max-width: 800px;
+  aspect-ratio: 16 / 9;
+  height: auto;
+  margin: 1.5rem auto;
+  border-radius: var(--border-radius);
+  border: 0;
+  box-shadow: var(--shadow-md);
+}
+
+.section pre {
+  background: #1e293b;
+  color: #e2e8f0;
+  padding: 1rem 1.25rem;
+  border-radius: var(--border-radius);
+  overflow-x: auto;
+  font-size: 0.875rem;
+  line-height: 1.6;
+}
+
+.section code {
+  font-family: 'Fira Code', 'Consolas', monospace;
+}
+
+.section p > code,
+.section li > code {
+  background: #f1f5f9;
+  color: #e11d48;
+  padding: 0.1em 0.4em;
+  border-radius: 4px;
+  font-size: 0.875em;
+}
+
+/*──────────────────────────────────────────────────────────────*/
+/* 11. Footer                                                   */
+/*──────────────────────────────────────────────────────────────*/
+footer {
+  background-color: var(--footer-bg);
+  color: rgba(255,255,255,0.75);
+  text-align: center;
+  padding: 1.5rem;
+  margin-top: 3rem;
+  font-size: 0.875rem;
+}
+
+footer p {
+  margin: 0;
+}
