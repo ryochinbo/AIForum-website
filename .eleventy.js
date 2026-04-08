@@ -4,6 +4,7 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.ignores.add("CLAUDE.md");
   eleventyConfig.ignores.add("design.md");
   eleventyConfig.ignores.add("plan.md");
+  eleventyConfig.ignores.add("github-actions-guide.md");
 
   // 静的ファイルのコピー
   eleventyConfig.addPassthroughCopy("images");
